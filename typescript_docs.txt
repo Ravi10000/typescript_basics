@@ -9,5 +9,21 @@ Target a specific version of javascript
     • tsc --target es2015 <filename>.ts
 
 Two important flags in typescript type checking
- • noImplicitAny - show errors for implicit type any
- • strictNullChecks - show errors for value of a variable can possibly be null | undefined
+    • noImplicitAny - show errors for implicit type any
+    • strictNullChecks - show errors for value of a variable can possibly be null | undefined
+
+Types in typescript
+    • string | number | boolean
+    • number[] is equivalent to Array<number>
+    • tuple is an array where we know exactly how many elements are there
+      and types of all elements in specific positions 
+      e.g. [number, string, boolean], [0] = number, [1] = string and [2] = boolean
+    • any types doesn't get type-checked
+    • Type annotations will always go after the thing being typed
+      e.g. const num : number;
+    • Even if you don’t have type annotations on your parameters, 
+      TypeScript will still check that you passed the right number of arguments.
+    • object - any javascript value with properties, which is almost all of them
+    • type annotations in object can be separated by , | ;
+      e.g. {x: number, y: number} | {x: number; y: number} 
+      (personal preference ; - this distinguishes type annotations from a real object definitions)
