@@ -1,0 +1,13 @@
+
+Convert .ts file to .js file
+    • tsc <filename>.ts
+
+Don't produce .js file if there's errors in .ts file
+    • tsc --noEmitOnError <filename>.ts
+
+Target a specific version of javascript
+    • tsc --target es2015 <filename>.ts
+
+Two important flags in typescript type checking
+ • noImplicitAny - show errors for implicit type any
+ • strictNullChecks - show errors for value of a variable can possibly be null | undefined
