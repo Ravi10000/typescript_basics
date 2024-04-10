@@ -1,4 +1,5 @@
 
+[Chapter 1] : The Basics
 Convert .ts file to .js file
     • tsc <filename>.ts
 
@@ -12,18 +13,41 @@ Two important flags in typescript type checking
     • noImplicitAny - show errors for implicit type any
     • strictNullChecks - show errors for value of a variable can possibly be null | undefined
 
+[Chapter 2] : Everyday Types
 Types in typescript
     • string | number | boolean
-    • number[] is equivalent to Array<number>
+    • number[] is equivalent to Array<number> = list of numbers
     • tuple is an array where we know exactly how many elements are there
       and types of all elements in specific positions 
       e.g. [number, string, boolean], [0] = number, [1] = string and [2] = boolean
     • any types doesn't get type-checked
     • Type annotations will always go after the thing being typed
-      e.g. const num : number;
+      e.g. const num : number; num = thing being typed, number = type of num
     • Even if you don’t have type annotations on your parameters, 
       TypeScript will still check that you passed the right number of arguments.
     • object - any javascript value with properties, which is almost all of them
     • type annotations in object can be separated by , | ;
       e.g. {x: number, y: number} | {x: number; y: number} 
       (personal preference ; - this distinguishes type annotations from a real object definitions)
+    • make a field in a object optional using ?: 
+      e.g. {num ?: number} - here num is optional and if provided should be number
+    • union (|) in used to combine types e.g. type age = string | number;
+    • type and interface keywords are used to create custom types
+    • only difference between type and interface keywords is that types with interface keywords can be modified 
+      after defining but types with type keywords are not modifiable after defining
+
+[Chapter 3] : Narrowing
+
+ • narrowing down possible operations using type guards
+ • typeof type guards
+ • typeof possible results = "string" | "number" | "bigint" | "boolean" | "function" | "object" | "symbol" | "undefined" 
+ • null == undefined -- true, loosely equality operator can be used to narrow down null and undefined values
+
+ • Truthiness narrowing
+ • falsy values = NaN, 0, 0n, null, undefined, false and ""
+ • in operator - check if a field exists in an object
+ • instanceOf - checks if something is instance of a class
+
+ • Assignments
+ • TypeScript looks at the right side of the assignment and narrows the left side appropriately
+ • assignability is always checked against the declared type
