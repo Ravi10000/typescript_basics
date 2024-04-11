@@ -35,6 +35,7 @@ Types in typescript
     • type and interface keywords are used to create custom types
     • only difference between type and interface keywords is that types with interface keywords can be modified 
       after defining but types with type keywords are not modifiable after defining
+    • and interface uses extends keyword and type uses & for extending type definitions
 
 [Chapter 3] : Narrowing
 
