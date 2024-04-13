@@ -77,3 +77,127 @@ interface BasicAddress {
 interface AddressWithUnit extends BasicAddress {
   unit: number;
 }
+
+interface Colorful {
+  color: string;
+}
+
+interface Circle {
+  radius: number;
+}
+
+interface ColorfulCircleInterface extends Colorful, Circle {}
+
+type ColorfulCircleType = Colorful & Circle;
+
+// instead of doing all that
+interface NumberBox {
+  contents: number;
+}
+
+interface StringBox {
+  contents: string;
+}
+
+interface BooleanBox {
+  contents: boolean;
+}
+
+function setContents(box: StringBox, newContents: string): void;
+function setContents(box: NumberBox, newContents: number): void;
+function setContents(box: BooleanBox, newContents: boolean): void;
+function setContents(box: { contents: any }, newContents: any) {
+  box.contents = newContents;
+}
+
+//  til here
+//  we can do
+
+interface Box<Type> {
+  contents: Type;
+}
+
+const numberBox: Box<number> = { contents: 200 };
+const stringBox: Box<string> = { contents: "hello" };
+
+interface User {
+  email: string;
+  password: string;
+}
+
+const userBox: Box<User[]> = {
+  contents: [{ email: "ravisince2k@gmail.com", password: "secure password" }],
+};
+
+function insertContentInBox<Type>(
+  existingContents: Type[],
+  newContent: Type
+): Type[] {
+  existingContents.push(newContent);
+  return existingContents;
+}
+
+// 2 ways to give Type its type
+// 1. pass it as a <parameter>
+insertContentInBox<User>(userBox.contents, {
+  email: "test",
+  password: "mail",
+});
+
+// 2. use as clause to define any of the arguments of Type type but doesn't work for User[]
+insertContentInBox(userBox.contents, {
+  email: "test",
+  password: "mail",
+} as User);
+
+type OrNull<Type> = Type | null;
+
+type OneOrMany<Type> = Type | Type[];
+
+type OneOrManyOrNull<Type> = OrNull<OneOrMany<Type>>;
+
+// type OneOrManyOrNull<Type> = OneOrMany<Type> | null
+
+type OneOrManyOrNullStrings = OneOrManyOrNull<string>;
+
+const normalArray: Array<string> = ["red", "green", "blue"];
+const roArray: ReadonlyArray<string> = ["red", "green", "blue"];
+
+// shorthands Array<Type> -> Type[] , ReadonlyArray<Type> -> readonly Type[]
+
+// tuple interface
+interface StringNumberPair {
+  // specialized properties
+  length: 2;
+  0: string;
+  1: number;
+
+  // Other 'Array<string | number>' members...
+  // slice(start?: number, end?: number): Array<string | number>;
+}
+
+const tuple: StringNumberPair = ["hello", 24];
+
+// optional element can be present in a tuple at end
+type Either2dOr3d = [number, number, number?];
+
+type StringNumberBooleans = [string, number, ...boolean[]];
+type StringBooleansNumber = [string, ...boolean[], number];
+type BooleansStringNumber = [...boolean[], string, number];
+
+// A tuple with a rest element has no set “length” - it only has a set of well-known elements in different positions.
+
+function readButtonInput(...args: [string, number, ...boolean[]]) {
+  const [name, version, ...input] = args;
+  // ...
+}
+
+// is basically equivalent to:
+
+// function readButtonInput(name: string, version: number, ...input: boolean[]) {
+// ...
+// }
+
+//  both are readonly
+// let point = [3, 4] as const;
+// let point: readonly [number, number] = [3, 4];
