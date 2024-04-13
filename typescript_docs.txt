@@ -1,7 +1,7 @@
 
 [Chapter 1] : The Basics
 Convert .ts file to .js file
-    • tsc <filename>.ts
+    • tsc <config-params...> <filename>.ts
 
 Don't produce .js file if there's errors in .ts file
     • tsc --noEmitOnError <filename>.ts
@@ -12,6 +12,9 @@ Target a specific version of javascript
 Two important flags in typescript type checking
     • noImplicitAny - show errors for implicit type any
     • strictNullChecks - show errors for value of a variable can possibly be null | undefined
+
+To produce js code with es2020 syntax with strict null checks and no implicit any types and don't emit if there's an error
+• tsc --target es2020 --noEmitOnError --noImplicitAny --strictNullChecks <filename>.ts
 
 [Chapter 2] : Everyday Types
 Types in typescript
